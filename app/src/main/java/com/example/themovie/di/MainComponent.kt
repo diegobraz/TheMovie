@@ -1,6 +1,7 @@
 package com.example.themovie.di
 
 
+import com.example.themovie.ui.HomeFragement
 import com.example.themovie.ui.MainActivity
 import dagger.Subcomponent
 
@@ -14,5 +15,6 @@ interface MainComponent {
 
 
     fun inject(activity: MainActivity)
+    fun inject(fragement: HomeFragement)
 
 }

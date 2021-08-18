@@ -11,8 +11,6 @@ interface MovieApi {
 
     @GET("movie/now_playing")
     fun getNowPlaying(
-        @Query("api_key")
-        api_Key:String,
         @Query("language")
         language : String? = null,
         @Query("page")
