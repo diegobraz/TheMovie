@@ -2,6 +2,7 @@ package com.example.themovie.di
 
 import com.example.themovie.AppConstants
 import com.example.themovie.network.MovieApi
+import com.example.themovie.network.NetworkResponseAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -53,6 +54,7 @@ class NetworkModule {
             .baseUrl(AppConstants.BASE_URL)
             .client(logginClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .build()
     }
 
