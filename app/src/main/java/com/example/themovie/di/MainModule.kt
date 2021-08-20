@@ -1,7 +1,7 @@
 package com.example.themovie.di
 
 import androidx.lifecycle.ViewModel
-import com.example.themovie.ui.HomeViewModel
+import com.example.themovie.ui.viewModel.HomeViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

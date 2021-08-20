@@ -1,4 +1,4 @@
-package com.example.themovie.ui
+package com.example.themovie.ui.viewModel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

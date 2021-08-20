@@ -1,6 +1,6 @@
 package com.example.themovie.di
 
-import com.example.themovie.AppConstants
+import com.example.themovie.utils.AppConstants
 import com.example.themovie.network.MovieApi
 import com.example.themovie.network.NetworkResponseAdapterFactory
 import dagger.Module
