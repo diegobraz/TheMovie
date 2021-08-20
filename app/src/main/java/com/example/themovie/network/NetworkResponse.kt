@@ -9,7 +9,6 @@ sealed class NetworkResponse<out T: Any, out U : Any>{
 
     data class Unknown<T:Any>(val erro:Throwable?= null):NetworkResponse<T,Nothing>()
 
-
     data class ApiErro<U:Any>(val body: U, val code : Int ):NetworkResponse<Nothing,U>()
 
 

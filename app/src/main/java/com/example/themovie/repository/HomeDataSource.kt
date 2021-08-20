@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 interface HomeDataSource {
 
-//    suspend fun getListMovies(dispatcher: CoroutineDispatcher,HomeResultCallback:
-//        (result:NetworkResponse<List<List<Movie>>>,ErroResponse )-> Unit)
+    suspend fun getListMovies(dispatcher: CoroutineDispatcher,HomeResultCallback:
+        (result:NetworkResponse<List<Movie>,ErroResponse> )-> Unit)
+
 }
