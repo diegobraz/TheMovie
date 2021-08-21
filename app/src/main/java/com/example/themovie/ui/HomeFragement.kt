@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themovie.R
 import com.example.themovie.databinding.HomeFragementBinding
 import com.example.themovie.ui.adapter.MovieListAdapter
 import com.example.themovie.ui.viewModel.HomeViewModel
@@ -43,7 +42,7 @@ class HomeFragement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.movieList.adapter = movieAdapter
-        binding.movieList.layoutManager =LinearLayoutManager(requireContext())
+        binding.movieList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
         viewModel.getMovies()
         viewModel.ListMovies?.observe(viewLifecycleOwner, Observer { MovieList ->

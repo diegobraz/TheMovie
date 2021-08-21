@@ -35,7 +35,6 @@ class MovieListAdapter(): ListAdapter<Movie, MovieListAdapter.viewHolder>(
 
             binding.titleMovie.text = item.title
             Glide.with(binding.root).load("https://image.tmdb.org/t/p/w500${item.poster_path}").into(binding.movieImage)
-
             }
 
         }
