@@ -10,7 +10,7 @@ import com.example.themovie.databinding.MovieItemBinding
 import com.example.themovie.model.dto.Movie
 
 
-class MovieListAdapter(): ListAdapter<Movie, MovieListAdapter.viewHolder>(
+class MovieListAdapter(val onClickMovie: (movie:Movie) -> Any): ListAdapter<Movie, MovieListAdapter.viewHolder>(
     DiffCallback()
 ) {
 
@@ -35,10 +35,17 @@ class MovieListAdapter(): ListAdapter<Movie, MovieListAdapter.viewHolder>(
 
             binding.titleMovie.text = item.title
             Glide.with(binding.root).load("https://image.tmdb.org/t/p/w500${item.poster_path}").into(binding.movieImage)
-            }
+            onClickListener(item,binding)
+        }
 
         }
+
+    private fun onClickListener(movie: Movie,binding: MovieItemBinding) {
+     binding.movieImage.setOnClickListener{
+         onClickMovie(movie)
+     }
     }
+}
 
 
     class DiffCallback: DiffUtil.ItemCallback<Movie>(){

@@ -3,6 +3,7 @@ package com.example.themovie.di
 
 import com.example.themovie.ui.HomeFragement
 import com.example.themovie.ui.MainActivity
+import com.example.themovie.ui.MovieDetailActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [])
@@ -15,6 +16,7 @@ interface MainComponent {
 
 
     fun inject(activity: MainActivity)
+    fun inject(activity: MovieDetailActivity)
     fun inject(fragement: HomeFragement)
 
 }
