@@ -19,7 +19,7 @@ import com.example.themovie.model.dto.Movie
 import com.example.themovie.ui.adapter.MovieListAdapter
 import com.example.themovie.ui.viewModel.HomeViewModel
 import javax.inject.Inject
-import androidx.fragment.app.FragmentManager
+import com.example.themovie.model.dto.tv.Tv
 import com.example.themovie.ui.adapter.TvListAdapter
 import kotlinx.android.synthetic.main.home_fragement.*
 
@@ -39,7 +39,7 @@ class HomeFragement : Fragment() {
 
     private val tvAdapter by lazy { TvListAdapter(
         onClickMovie = { tv ->
-            Toast.makeText(requireContext(), "Deu certo pvt", Toast.LENGTH_SHORT).show()
+            onCreateTrendingDetail(tv)
         }
     ) }
 
@@ -81,7 +81,6 @@ class HomeFragement : Fragment() {
         })
 
         viewModel.ListTV?.observe(viewLifecycleOwner, Observer { TVList ->
-            Toast.makeText(requireContext(), "${tv_list}", Toast.LENGTH_SHORT).show()
            tvAdapter.submitList(TVList)
         })
 
@@ -94,4 +93,13 @@ class HomeFragement : Fragment() {
         startActivity(intent)
 
     }
+
+
+    private fun onCreateTrendingDetail(tv:Tv) {
+
+        val intent = Intent(activity, TrendingDetailActivity::class.java)
+        intent.putExtra("tv", tv)
+        startActivity(intent)
+    }
+
 }
