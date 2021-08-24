@@ -2,51 +2,48 @@ package com.example.themovie.repository
 
 import com.example.themovie.model.dto.Movie
 import com.example.themovie.model.dto.MovieResponse
+import com.example.themovie.model.dto.tv.Tv
+import com.example.themovie.model.dto.tv.TvResponse
 import com.example.themovie.network.ErroResponse
-import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponse
+import com.example.themovie.network.api.TvApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
-class HomeDataImpl
-@Inject constructor(
-    private val movieApi: MovieApi
-):HomeDataSource {
-
-
-    override suspend fun getListMovies(
+class TvDataImpl @Inject constructor(
+    private val tvApi: TvApi
+):TvDataSource {
+    override suspend fun getTrendingTv(
         dispatcher: CoroutineDispatcher,
-        HomeResultCallback: (result: NetworkResponse<List<Movie>, ErroResponse>) -> Unit
+        HomeTvResultCallback: (result: NetworkResponse<List<Tv>, ErroResponse>) -> Unit
     ) {
         withContext(dispatcher){
-            val showMovies = async {
-                movieApi.getNowPlaying("en-Us",1)
-
+            val showTredingTv = async {
+                tvApi.getTrending("en-Us",1)
             }
 
-            processData(HomeResultCallback,showMovies.await())
+            processData(HomeTvResultCallback,showTredingTv.await())
         }
-
-
     }
 
+    private fun processData(homeTvResultCallback: (result: NetworkResponse<List<Tv>, ErroResponse>) -> Unit, await: NetworkResponse<TvResponse, ErroResponse>) {
 
-    private fun processData(homeResultCallback: (result: NetworkResponse<List<Movie>, ErroResponse>)
-    -> Unit, await: NetworkResponse<MovieResponse, ErroResponse>) {
         val pair = buildResponse(await)
         if (pair.first == null){
-            pair.second?.let { homeResultCallback(it) }
+            pair.second?.let { homeTvResultCallback(it) }
         }else{
-            homeResultCallback(NetworkResponse.Success(pair.first!!))
+            homeTvResultCallback(NetworkResponse.Success(pair.first!!))
         }
+
+
 
     }
 
-    private fun buildResponse(await: NetworkResponse<MovieResponse, ErroResponse>):
-            Pair<List<Movie>?, NetworkResponse<List<Movie>,ErroResponse>? >{
+    private fun buildResponse(await: NetworkResponse<TvResponse, ErroResponse>):
+            Pair<List<Tv>?, NetworkResponse<List<Tv>,ErroResponse>? >{
 
         return when(await){
 
@@ -65,6 +62,7 @@ class HomeDataImpl
         }
 
     }
+
 
 
 }

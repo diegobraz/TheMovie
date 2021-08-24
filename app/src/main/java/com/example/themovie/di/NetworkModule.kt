@@ -1,8 +1,9 @@
 package com.example.themovie.di
 
 import com.example.themovie.utils.AppConstants
-import com.example.themovie.network.MovieApi
+import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponseAdapterFactory
+import com.example.themovie.network.api.TvApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -60,10 +61,16 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun tmdApi(retrofit: Retrofit):MovieApi{
+    fun tmdApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
     }
 
+
+    @Singleton
+    @Provides
+    fun tmdTvApi(retrofit: Retrofit):TvApi{
+        return retrofit.create(TvApi::class.java)
+    }
 
 
 

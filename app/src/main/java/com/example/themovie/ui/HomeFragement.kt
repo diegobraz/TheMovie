@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,9 +59,16 @@ class HomeFragement : Fragment() {
         binding.movieList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
         viewModel.getMovies()
+        viewModel.getTrendingTV()
+
+
         viewModel.ListMovies?.observe(viewLifecycleOwner, Observer { MovieList ->
             movieAdapter.submitList(MovieList)
 
+        })
+
+        viewModel.ListTV?.observe(viewLifecycleOwner, Observer { TVList ->
+           Log.d("diegoTv","${TVList}")
         })
 
     }

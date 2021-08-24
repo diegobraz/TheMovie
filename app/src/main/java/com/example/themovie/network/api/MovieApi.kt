@@ -1,12 +1,10 @@
-package com.example.themovie.network
-
-
+package com.example.themovie.network.api
 
 import com.example.themovie.model.dto.MovieResponse
-import retrofit2.Call
+import com.example.themovie.network.ErroResponse
+import com.example.themovie.network.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.lang.Error
 
 interface MovieApi {
 
@@ -18,6 +16,6 @@ interface MovieApi {
         page : Int? = null,
         @Query("region")
         region : String? = null
-    ): NetworkResponse<MovieResponse,ErroResponse>
+    ): NetworkResponse<MovieResponse, ErroResponse>
 
 }
