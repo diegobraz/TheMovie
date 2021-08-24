@@ -20,6 +20,8 @@ import com.example.themovie.ui.adapter.MovieListAdapter
 import com.example.themovie.ui.viewModel.HomeViewModel
 import javax.inject.Inject
 import androidx.fragment.app.FragmentManager
+import com.example.themovie.ui.adapter.TvListAdapter
+import kotlinx.android.synthetic.main.home_fragement.*
 
 
 class HomeFragement : Fragment() {
@@ -27,9 +29,17 @@ class HomeFragement : Fragment() {
     @Inject
     lateinit var vieModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<HomeViewModel>{ vieModelFactory }
+
     private val movieAdapter by lazy { MovieListAdapter(
         onClickMovie = { movie ->
             onCreateDetailMovie(movie)
+        }
+    ) }
+
+
+    private val tvAdapter by lazy { TvListAdapter(
+        onClickMovie = { tv ->
+            Toast.makeText(requireContext(), "Deu certo pvt", Toast.LENGTH_SHORT).show()
         }
     ) }
 
@@ -58,6 +68,9 @@ class HomeFragement : Fragment() {
         binding.movieList.adapter = movieAdapter
         binding.movieList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
+        binding.tvList.adapter = tvAdapter
+        binding.tvList.layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+
         viewModel.getMovies()
         viewModel.getTrendingTV()
 
@@ -68,7 +81,8 @@ class HomeFragement : Fragment() {
         })
 
         viewModel.ListTV?.observe(viewLifecycleOwner, Observer { TVList ->
-           Log.d("diegoTv","${TVList}")
+            Toast.makeText(requireContext(), "${tv_list}", Toast.LENGTH_SHORT).show()
+           tvAdapter.submitList(TVList)
         })
 
     }
