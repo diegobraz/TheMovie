@@ -11,12 +11,12 @@
     <ImageView
         android:id="@+id/movie_Image_detail"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="fitXY"
+        android:scaleType="fitStart"
         tools:src="@tools:sample/avatars"
         android:contentDescription="@string/movie_image_description">
 
@@ -24,12 +24,14 @@
 
 
     <TextView
-        android:id="@+id/title_movie_deatil"
+        android:id="@+id/title_movie_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_marginTop="12dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="12dp"
         android:textColor= "@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,17 +39,34 @@
         tools:text="Iron Man"
         android:gravity="center_horizontal" />
 
+
+    <TextView
+        android:id="@+id/release_data__movie_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        android:layout_marginStart="12dp"
+        android:textColor= "@color/textColorHint"
+        app:layout_constraintStart_toEndOf="@id/movie_votes"
+        app:layout_constraintTop_toBottomOf="@id/title_movie_detail"
+        tools:text="2021"
+        android:gravity="center_horizontal" />
+
+
     <TextView
         android:id="@+id/movie_votes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_marginTop="12dp"
-        android:textSize="22sp"
+        android:layout_marginStart="12dp"
+        android:textSize="18sp"
         android:textColor="@color/classification"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_movie_deatil"
-        tools:text="Iron Man"
+        app:layout_constraintTop_toBottomOf="@id/title_movie_detail"
+        tools:text="4.6"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -56,8 +75,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="2dp"
-        android:textSize="18sp"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_votes"

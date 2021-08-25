@@ -24,9 +24,11 @@ class TrendingDetailActivity : AppCompatActivity() {
     }
 
     private fun loadInformation() {
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500${trending.poster_path}").into(biding.tvImageDetail)
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500${trending.backdrop_path}").into(biding.tvImageDetail)
         biding.tvTitle.text = trending.original_name
+        Log.d("diegoMedia","${trending.media_type}")
         biding.descriptionDetail.text = trending.overview
         biding.tvVotes.text = "${trending.vote_average} averege votes"
+
     }
 }
