@@ -1,7 +1,7 @@
-package com.example.themovie.repository
+package com.example.themovie.repository.movie
 
-import com.example.themovie.model.dto.Movie
-import com.example.themovie.model.dto.MovieResponse
+import com.example.themovie.model.dto.movie.Movie
+import com.example.themovie.model.dto.movie.MovieResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponse
@@ -11,10 +11,10 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
-class HomeDataImpl
+class MovieDataImpl
 @Inject constructor(
     private val movieApi: MovieApi
-):HomeDataSource {
+): MovieDataSource {
 
 
     override suspend fun getListMovies(

@@ -6,17 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themovie.databinding.MovieItemBinding
-import com.example.themovie.databinding.TvItemBinding
-import com.example.themovie.model.dto.Movie
-import com.example.themovie.model.dto.tv.Tv
+import com.example.themovie.databinding.TrendingItemBinding
+import com.example.themovie.model.dto.Trending.Trending
 
-class TvListAdapter(val onClickMovie: (tv:Tv) -> Any): ListAdapter<Tv, TvListAdapter.viewHolder>(
+class TrendingListAdapter(val onClickMovie: (trending:Trending) -> Any): ListAdapter<Trending, TrendingListAdapter.viewHolder>(
     TvDiffCallback()
 ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvListAdapter.viewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingListAdapter.viewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = TvItemBinding.inflate(inflater, parent, false)
+        val binding = TrendingItemBinding.inflate(inflater, parent, false)
 
         return viewHolder(binding)
     }
@@ -27,9 +25,9 @@ class TvListAdapter(val onClickMovie: (tv:Tv) -> Any): ListAdapter<Tv, TvListAda
 
 
     inner class viewHolder(
-        private val binding: TvItemBinding
+        private val binding: TrendingItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Tv) {
+        fun bind(item: Trending) {
 
             binding.titleTv.text = item.original_name
             Glide.with(binding.root).load("https://image.tmdb.org/t/p/w500${item.poster_path}")
@@ -39,16 +37,16 @@ class TvListAdapter(val onClickMovie: (tv:Tv) -> Any): ListAdapter<Tv, TvListAda
 
     }
 
-    private fun onClickListener(tv: Tv, binding: TvItemBinding) {
+    private fun onClickListener(trending: Trending, binding: TrendingItemBinding) {
         binding.tvImage.setOnClickListener {
-            onClickMovie(tv)
+            onClickMovie(trending)
         }
 
 
     }
 }
-    class TvDiffCallback: DiffUtil.ItemCallback<Tv>(){
-        override fun areItemsTheSame(oldItem: Tv, newItem: Tv) = oldItem == newItem
+    class TvDiffCallback: DiffUtil.ItemCallback<Trending>(){
+        override fun areItemsTheSame(oldItem: Trending, newItem: Trending) = oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: Tv, newItem: Tv) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Trending, newItem: Trending) = oldItem.id == newItem.id
     }

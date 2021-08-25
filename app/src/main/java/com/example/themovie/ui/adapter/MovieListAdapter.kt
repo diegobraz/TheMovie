@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themovie.databinding.MovieItemBinding
-import com.example.themovie.model.dto.Movie
+import com.example.themovie.model.dto.movie.Movie
 
 
-class MovieListAdapter(val onClickMovie: (movie:Movie) -> Any): ListAdapter<Movie, MovieListAdapter.viewHolder>(
+class MovieListAdapter(val onClickMovie: (movie: Movie) -> Any): ListAdapter<Movie, MovieListAdapter.viewHolder>(
     DiffCallback()
 ) {
 
@@ -40,7 +40,7 @@ class MovieListAdapter(val onClickMovie: (movie:Movie) -> Any): ListAdapter<Movi
 
         }
 
-    private fun onClickListener(movie: Movie,binding: MovieItemBinding) {
+    private fun onClickListener(movie: Movie, binding: MovieItemBinding) {
      binding.movieImage.setOnClickListener{
          onClickMovie(movie)
      }

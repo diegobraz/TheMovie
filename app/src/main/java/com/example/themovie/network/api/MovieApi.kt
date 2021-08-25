@@ -1,6 +1,6 @@
 package com.example.themovie.network.api
 
-import com.example.themovie.model.dto.MovieResponse
+import com.example.themovie.model.dto.movie.MovieResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
 import retrofit2.http.GET

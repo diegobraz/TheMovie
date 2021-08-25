@@ -1,16 +1,17 @@
-package com.example.themovie.di
+package com.example.themovie.ui.di
 
 
 import com.example.themovie.ui.HomeFragement
 import com.example.themovie.ui.MainActivity
 import com.example.themovie.ui.MovieDetailActivity
+import com.example.themovie.ui.TrendingDetailActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [])
 interface MainComponent {
 
     @Subcomponent.Factory
-    interface factory{
+    interface factory {
         fun create(): MainComponent
     }
 
@@ -18,5 +19,5 @@ interface MainComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: MovieDetailActivity)
     fun inject(fragement: HomeFragement)
-
+    fun inject(activity: TrendingDetailActivity)
 }

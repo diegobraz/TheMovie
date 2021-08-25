@@ -1,4 +1,4 @@
-package com.example.themovie.model.dto
+package com.example.themovie.model.dto.movie
 
 data class MovieResponse(
     val dates: Dates,

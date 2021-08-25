@@ -1,35 +1,33 @@
-package com.example.themovie.repository
+package com.example.themovie.repository.trending
 
-import com.example.themovie.model.dto.Movie
-import com.example.themovie.model.dto.MovieResponse
-import com.example.themovie.model.dto.tv.Tv
-import com.example.themovie.model.dto.tv.TvResponse
+import com.example.themovie.model.dto.Trending.Trending
+import com.example.themovie.model.dto.Trending.TrendingResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
-import com.example.themovie.network.api.TvApi
+import com.example.themovie.network.api.TrendingApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
-class TvDataImpl @Inject constructor(
-    private val tvApi: TvApi
-):TvDataSource {
+class TrendingDataImpl @Inject constructor(
+    private val trendingApi: TrendingApi
+): TrendingDataSource {
     override suspend fun getTrendingTv(
         dispatcher: CoroutineDispatcher,
-        HomeTvResultCallback: (result: NetworkResponse<List<Tv>, ErroResponse>) -> Unit
+        HomeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit
     ) {
         withContext(dispatcher){
             val showTredingTv = async {
-                tvApi.getTrending("en-Us",1)
+                trendingApi.getTrending("en-Us",1)
             }
 
             processData(HomeTvResultCallback,showTredingTv.await())
         }
     }
 
-    private fun processData(homeTvResultCallback: (result: NetworkResponse<List<Tv>, ErroResponse>) -> Unit, await: NetworkResponse<TvResponse, ErroResponse>) {
+    private fun processData(homeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit, await: NetworkResponse<TrendingResponse, ErroResponse>) {
 
         val pair = buildResponse(await)
         if (pair.first == null){
@@ -42,8 +40,8 @@ class TvDataImpl @Inject constructor(
 
     }
 
-    private fun buildResponse(await: NetworkResponse<TvResponse, ErroResponse>):
-            Pair<List<Tv>?, NetworkResponse<List<Tv>,ErroResponse>? >{
+    private fun buildResponse(await: NetworkResponse<TrendingResponse, ErroResponse>):
+            Pair<List<Trending>?, NetworkResponse<List<Trending>,ErroResponse>? >{
 
         return when(await){
 

@@ -1,13 +1,12 @@
-package com.example.themovie.repository
+package com.example.themovie.repository.movie
 
 
-import com.example.themovie.model.dto.Movie
-import com.example.themovie.model.dto.tv.Tv
+import com.example.themovie.model.dto.movie.Movie
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface HomeDataSource {
+interface MovieDataSource {
 
     suspend fun getListMovies(dispatcher: CoroutineDispatcher,HomeResultCallback:
         (result:NetworkResponse<List<Movie>,ErroResponse> )-> Unit)

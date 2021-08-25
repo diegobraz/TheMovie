@@ -1,10 +1,10 @@
 package com.example.themovie.di
 
 
-import com.example.themovie.repository.HomeDataImpl
-import com.example.themovie.repository.HomeDataSource
-import com.example.themovie.repository.TvDataImpl
-import com.example.themovie.repository.TvDataSource
+import com.example.themovie.repository.movie.MovieDataImpl
+import com.example.themovie.repository.movie.MovieDataSource
+import com.example.themovie.repository.trending.TrendingDataImpl
+import com.example.themovie.repository.trending.TrendingDataSource
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -13,11 +13,11 @@ import javax.inject.Singleton
 abstract class DataModule {
     @Singleton
     @Binds
-    abstract fun provideHomdeDataSource(datasource: HomeDataImpl):HomeDataSource
+    abstract fun provideHomdeDataSource(datasource: MovieDataImpl): MovieDataSource
 
 
     @Singleton
     @Binds
-    abstract fun provideTVDataSouce(datasource: TvDataImpl):TvDataSource
+    abstract fun provideTVDataSouce(datasource: TrendingDataImpl): TrendingDataSource
 
 }

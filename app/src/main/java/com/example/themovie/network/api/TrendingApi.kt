@@ -1,13 +1,13 @@
 package com.example.themovie.network.api
 
-import com.example.themovie.model.dto.tv.TvResponse
+import com.example.themovie.model.dto.Trending.TrendingResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface TvApi {
-    @GET("trending/movie/day")
+interface TrendingApi {
+    @GET("trending/tv/day")
     suspend fun getTrending(
         @Query("language")
         language : String? = null,
@@ -16,6 +16,6 @@ interface TvApi {
         @Query("region")
         region : String? = null
 
-    ): NetworkResponse<TvResponse, ErroResponse>
+    ): NetworkResponse<TrendingResponse, ErroResponse>
 
 }

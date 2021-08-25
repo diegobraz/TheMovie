@@ -3,7 +3,7 @@ package com.example.themovie.di
 import com.example.themovie.utils.AppConstants
 import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponseAdapterFactory
-import com.example.themovie.network.api.TvApi
+import com.example.themovie.network.api.TrendingApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -68,8 +68,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun tmdTvApi(retrofit: Retrofit):TvApi{
-        return retrofit.create(TvApi::class.java)
+    fun tmdTvApi(retrofit: Retrofit):TrendingApi{
+        return retrofit.create(TrendingApi::class.java)
     }
 
 

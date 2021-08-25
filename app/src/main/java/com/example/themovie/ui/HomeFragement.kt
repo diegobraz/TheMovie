@@ -9,19 +9,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themovie.R
 import com.example.themovie.databinding.HomeFragementBinding
-import com.example.themovie.model.dto.Movie
+import com.example.themovie.model.dto.movie.Movie
 import com.example.themovie.ui.adapter.MovieListAdapter
 import com.example.themovie.ui.viewModel.HomeViewModel
 import javax.inject.Inject
-import com.example.themovie.model.dto.tv.Tv
-import com.example.themovie.ui.adapter.TvListAdapter
-import kotlinx.android.synthetic.main.home_fragement.*
+import com.example.themovie.model.dto.Trending.Trending
+import com.example.themovie.ui.adapter.TrendingListAdapter
 
 
 class HomeFragement : Fragment() {
@@ -37,9 +34,10 @@ class HomeFragement : Fragment() {
     ) }
 
 
-    private val tvAdapter by lazy { TvListAdapter(
-        onClickMovie = { tv ->
-            onCreateTrendingDetail(tv)
+    private val trendingAdapter by lazy { TrendingListAdapter(
+        onClickMovie = { trending->
+            Log.d("diegotreding","${trending}")
+            onCreateTrendingDetail(trending)
         }
     ) }
 
@@ -68,7 +66,7 @@ class HomeFragement : Fragment() {
         binding.movieList.adapter = movieAdapter
         binding.movieList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
-        binding.tvList.adapter = tvAdapter
+        binding.tvList.adapter = trendingAdapter
         binding.tvList.layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
         viewModel.getMovies()
@@ -80,8 +78,8 @@ class HomeFragement : Fragment() {
 
         })
 
-        viewModel.ListTV?.observe(viewLifecycleOwner, Observer { TVList ->
-           tvAdapter.submitList(TVList)
+        viewModel.listTrending?.observe(viewLifecycleOwner, Observer { TVList ->
+           trendingAdapter.submitList(TVList)
         })
 
     }
@@ -95,10 +93,10 @@ class HomeFragement : Fragment() {
     }
 
 
-    private fun onCreateTrendingDetail(tv:Tv) {
+    private fun onCreateTrendingDetail(trending:Trending) {
 
         val intent = Intent(activity, TrendingDetailActivity::class.java)
-        intent.putExtra("tv", tv)
+        intent.putExtra("trending", trending)
         startActivity(intent)
     }
 

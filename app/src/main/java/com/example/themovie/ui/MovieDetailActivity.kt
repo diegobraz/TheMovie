@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.themovie.databinding.ActivityMovieDetailBinding
-import com.example.themovie.model.dto.Movie
-import kotlinx.android.synthetic.main.activity_movie_detail.*
+import com.example.themovie.model.dto.movie.Movie
 
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -27,5 +26,6 @@ class MovieDetailActivity : AppCompatActivity() {
         Glide.with(this).load("https://image.tmdb.org/t/p/w500${movie.poster_path}").into(biding.movieImageDetail)
         biding.titleMovieDeatil.text = movie.title
         biding.descriptionMovieDeatil.text = movie.overview
+        biding.movieVotes.text = "${movie.vote_average} avarege vote"
     }
 }

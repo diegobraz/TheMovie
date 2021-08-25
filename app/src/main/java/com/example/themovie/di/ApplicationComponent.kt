@@ -1,6 +1,7 @@
 package com.example.themovie.di
 
 import android.content.Context
+import com.example.themovie.ui.di.MainComponent
 
 import dagger.BindsInstance
 import dagger.Component

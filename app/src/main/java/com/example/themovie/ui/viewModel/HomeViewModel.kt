@@ -6,22 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themovie.di.IoDispatcher
-import com.example.themovie.model.dto.Movie
-import com.example.themovie.model.dto.tv.Tv
+import com.example.themovie.model.dto.movie.Movie
+import com.example.themovie.model.dto.Trending.Trending
 import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponse
-import com.example.themovie.network.api.TvApi
-import com.example.themovie.repository.HomeDataSource
-import com.example.themovie.repository.TvDataSource
+import com.example.themovie.network.api.TrendingApi
+import com.example.themovie.repository.movie.MovieDataSource
+import com.example.themovie.repository.trending.TrendingDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     val movieApi: MovieApi,
-    val tvApi: TvApi,
-    val homeDataSource: HomeDataSource,
-    val tvDataSource: TvDataSource,
+    val trendingApi: TrendingApi,
+    val homeDataSource: MovieDataSource,
+    val trendingDataSource: TrendingDataSource,
     @IoDispatcher val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -29,8 +29,8 @@ class HomeViewModel @Inject constructor(
     val ListMovies:LiveData<List<Movie>>? = _listMovies
 
 
-    private var _listTV : MutableLiveData<List<Tv>> = MutableLiveData()
-    val ListTV:LiveData<List<Tv>>? = _listTV
+    private var _listTrending : MutableLiveData<List<Trending>> = MutableLiveData()
+    val listTrending:LiveData<List<Trending>>? = _listTrending
 
     fun getMovies(){
         viewModelScope.launch(dispatcher) {
@@ -54,10 +54,10 @@ class HomeViewModel @Inject constructor(
 
     fun getTrendingTV(){
         viewModelScope.launch(dispatcher){
-            tvDataSource.getTrendingTv(dispatcher){result ->
+            trendingDataSource.getTrendingTv(dispatcher){ result ->
                 when(result){
                     is NetworkResponse.Success ->{
-                        _listTV.postValue(result.body)
+                        _listTrending.postValue(result.body)
                     }
 
                     is NetworkResponse.Unknown -> {
