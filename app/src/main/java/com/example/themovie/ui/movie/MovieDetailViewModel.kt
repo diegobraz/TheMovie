@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themovie.di.IoDispatcher
-import com.example.themovie.model.dto.DetailResponse
+import com.example.themovie.model.dto.movieDetail.DetailMovieResponse
 import com.example.themovie.network.NetworkResponse
 import com.example.themovie.network.api.MovieApi
 import com.example.themovie.repository.movie.MovieDataSource
@@ -20,8 +20,8 @@ class MovieDetailViewModel @Inject constructor(
 
     ): ViewModel() {
 
-    private val _movie: MutableLiveData<DetailResponse> = MutableLiveData()
-    val movie: LiveData<DetailResponse> = _movie
+    private val _movie: MutableLiveData<DetailMovieResponse> = MutableLiveData()
+    val movie: LiveData<DetailMovieResponse> = _movie
 
 
     fun getDetail(id:Int){

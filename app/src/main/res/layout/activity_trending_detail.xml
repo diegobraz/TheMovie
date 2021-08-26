@@ -71,6 +71,45 @@
         tools:text="@tools:sample/lorem"
         />
 
+    <TextView
+        android:id="@+id/genre_movie_deatil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_detail"
+        tools:text="Drame" />
+
+
+    <TextView
+        android:id="@+id/genre2_movie_deatil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/genre_movie_deatil"
+        app:layout_constraintTop_toBottomOf="@id/description_detail"
+
+        tools:text="Horror" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prodution_relycle_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/genre_movie_deatil"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="12dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

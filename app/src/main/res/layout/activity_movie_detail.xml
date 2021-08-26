@@ -89,6 +89,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
         android:layout_marginTop="12dp"
+
         android:layout_marginStart="12dp"
         android:textSize="12sp"
         android:textColor="@color/white"
@@ -111,6 +112,19 @@
         app:layout_constraintTop_toBottomOf="@id/description_movie_deatil"
 
         tools:text="Horror" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prodution_relycle_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/genre_movie_deatil"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="12dp"
+        />
+
+
 
 
 

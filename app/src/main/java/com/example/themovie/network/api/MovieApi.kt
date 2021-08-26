@@ -1,6 +1,6 @@
 package com.example.themovie.network.api
 
-import com.example.themovie.model.dto.DetailResponse
+import com.example.themovie.model.dto.movieDetail.DetailMovieResponse
 import com.example.themovie.model.dto.movie.MovieResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
@@ -29,6 +29,6 @@ interface MovieApi {
         language : String? = null,
        @Query("append_to_response")
         append: String? = null
-    ): NetworkResponse<DetailResponse, ErroResponse>
+    ): NetworkResponse<DetailMovieResponse, ErroResponse>
 
 }

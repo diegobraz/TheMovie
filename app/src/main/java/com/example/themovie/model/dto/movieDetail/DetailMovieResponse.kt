@@ -1,6 +1,6 @@
-package com.example.themovie.model.dto
+package com.example.themovie.model.dto.movieDetail
 
-data class DetailResponse(
+data class DetailMovieResponse(
     val adult: Boolean,
     val backdrop_path: String,
     val belongs_to_collection: BelongsToCollection,

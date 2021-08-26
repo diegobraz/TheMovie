@@ -1,4 +1,4 @@
-package com.example.themovie.model.dto
+package com.example.themovie.model.dto.movieDetail
 
 data class BelongsToCollection(
     val backdrop_path: String,

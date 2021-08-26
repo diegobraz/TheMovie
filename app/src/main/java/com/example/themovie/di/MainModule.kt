@@ -1,6 +1,8 @@
 package com.example.themovie.di
 
 import androidx.lifecycle.ViewModel
+import com.example.themovie.ui.DetailTrendingViewModel
+import com.example.themovie.ui.TrendingDetailActivity
 import com.example.themovie.ui.home.viewModel.HomeViewModel
 import com.example.themovie.ui.movie.MovieDetailViewModel
 import dagger.Binds
@@ -19,5 +21,12 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(MovieDetailViewModel::class)
     fun bindMovieDetailViewModel(movieDetailViewModel: MovieDetailViewModel):ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailTrendingViewModel::class)
+    fun bindTrendingDetailViewModel(trendingViewModel: DetailTrendingViewModel):ViewModel
+
+
 
 }
