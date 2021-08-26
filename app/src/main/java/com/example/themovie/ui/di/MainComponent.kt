@@ -1,9 +1,9 @@
 package com.example.themovie.ui.di
 
 
-import com.example.themovie.ui.HomeFragement
+import com.example.themovie.ui.home.HomeFragement
 import com.example.themovie.ui.MainActivity
-import com.example.themovie.ui.MovieDetailActivity
+import com.example.themovie.ui.movie.MovieDetailActivity
 import com.example.themovie.ui.TrendingDetailActivity
 import dagger.Subcomponent
 

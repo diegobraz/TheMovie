@@ -1,6 +1,5 @@
-package com.example.themovie.ui.viewModel
+package com.example.themovie.ui.home.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,25 +7,27 @@ import androidx.lifecycle.viewModelScope
 import com.example.themovie.di.IoDispatcher
 import com.example.themovie.model.dto.movie.Movie
 import com.example.themovie.model.dto.Trending.Trending
-import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponse
-import com.example.themovie.network.api.TrendingApi
 import com.example.themovie.repository.movie.MovieDataSource
 import com.example.themovie.repository.trending.TrendingDataSource
+import com.example.themovie.utils.GenericErro
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    val movieApi: MovieApi,
-    val trendingApi: TrendingApi,
-    val homeDataSource: MovieDataSource,
+    val movieDataSource: MovieDataSource,
     val trendingDataSource: TrendingDataSource,
     @IoDispatcher val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
    private var _listMovies : MutableLiveData<List<Movie>> = MutableLiveData()
-    val ListMovies:LiveData<List<Movie>>? = _listMovies
+    val listMovies:LiveData<List<Movie>>? = _listMovies
+
+
+    private var _erroMessage : String? = null
+    val erroMessage:String? = _erroMessage
+
 
 
     private var _listTrending : MutableLiveData<List<Trending>> = MutableLiveData()
@@ -34,16 +35,21 @@ class HomeViewModel @Inject constructor(
 
     fun getMovies(){
         viewModelScope.launch(dispatcher) {
-            homeDataSource.getListMovies(dispatcher){result ->
+            movieDataSource.getListMovies(dispatcher){ result ->
 
                 when(result){
                     is NetworkResponse.Success ->{
                         _listMovies.postValue(result.body)
                     }
-
-                    is NetworkResponse.Unknown -> {}
-                    is NetworkResponse.ApiErro -> {}
-                    is NetworkResponse.Erro -> {}
+                    is NetworkResponse.Unknown -> {
+                        _erroMessage = GenericErro.ERRO_UNKNOW
+                    }
+                    is NetworkResponse.ApiErro -> {
+                        _erroMessage = GenericErro.ERRO_API
+                    }
+                    is NetworkResponse.Erro -> {
+                        _erroMessage = GenericErro.ERRO
+                    }
                 }
 
             }
@@ -61,13 +67,13 @@ class HomeViewModel @Inject constructor(
                     }
 
                     is NetworkResponse.Unknown -> {
-                        Log.d("diegoTV","erro")
+                        _erroMessage = GenericErro.ERRO_UNKNOW
                     }
                     is NetworkResponse.ApiErro -> {
-                        Log.d("diegoTV","erro")
+                        _erroMessage = GenericErro.ERRO_API
                     }
                     is NetworkResponse.Erro -> {
-                        Log.d("diegoTV","erro")
+                        _erroMessage = GenericErro.ERRO
                     }
                 }
 

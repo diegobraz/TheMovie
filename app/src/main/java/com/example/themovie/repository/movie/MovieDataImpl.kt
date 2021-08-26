@@ -1,5 +1,6 @@
 package com.example.themovie.repository.movie
 
+import com.example.themovie.model.dto.DetailResponse
 import com.example.themovie.model.dto.movie.Movie
 import com.example.themovie.model.dto.movie.MovieResponse
 import com.example.themovie.network.ErroResponse
@@ -65,6 +66,24 @@ class MovieDataImpl
         }
 
     }
+
+
+//    override suspend fun getDetail(
+//        dispatcher: CoroutineDispatcher,
+//        DetailResultCallback: (result: NetworkResponse<DetailResponse, ErroResponse>) -> Unit,id:Int
+//    ) {
+//        withContext(dispatcher){
+//            val getDetail = async {
+//                movieApi.getDetail(id = id)
+//            }
+//            processDetail(DetailResultCallback,getDetail.await())
+//        }
+//    }
+//
+//    private fun processDetail(detailResultCallback: (result: NetworkResponse<DetailResponse, ErroResponse>) -> Unit, await: NetworkResponse<DetailResponse, ErroResponse>) {
+//
+//
+//    }
 
 
 }

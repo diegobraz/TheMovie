@@ -6,6 +6,7 @@ import com.example.themovie.App
 import com.example.themovie.R
 import com.example.themovie.databinding.ActivityMainBinding
 import com.example.themovie.ui.di.MainComponent
+import com.example.themovie.ui.home.HomeFragement
 
 class MainActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.MovieDetailActivity">
+    tools:context=".ui.movie.MovieDetailActivity">
 
 
     <ImageView
@@ -81,6 +81,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_votes"
         tools:text="Descrição" />
+
+
+    <TextView
+        android:id="@+id/genre_movie_deatil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_movie_deatil"
+        tools:text="Drame" />
+
+
+    <TextView
+        android:id="@+id/genre2_movie_deatil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/genre_movie_deatil"
+        app:layout_constraintTop_toBottomOf="@id/description_movie_deatil"
+
+        tools:text="Horror" />
 
 
 

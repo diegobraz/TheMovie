@@ -17,7 +17,7 @@
             android:name=".ui.TrendingDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.MovieDetailActivity"
+            android:name=".ui.movie.MovieDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.MainActivity"

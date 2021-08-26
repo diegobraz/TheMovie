@@ -1,4 +1,4 @@
-package com.example.themovie.ui
+package com.example.themovie.ui.home
 
 import android.content.Context
 import android.content.Intent
@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovie.databinding.HomeFragementBinding
 import com.example.themovie.model.dto.movie.Movie
 import com.example.themovie.ui.adapter.MovieListAdapter
-import com.example.themovie.ui.viewModel.HomeViewModel
+import com.example.themovie.ui.home.viewModel.HomeViewModel
 import javax.inject.Inject
 import com.example.themovie.model.dto.Trending.Trending
+import com.example.themovie.ui.MainActivity
+import com.example.themovie.ui.movie.MovieDetailActivity
+import com.example.themovie.ui.TrendingDetailActivity
 import com.example.themovie.ui.adapter.TrendingListAdapter
 
 
@@ -73,10 +77,13 @@ class HomeFragement : Fragment() {
         viewModel.getTrendingTV()
 
 
-        viewModel.ListMovies?.observe(viewLifecycleOwner, Observer { MovieList ->
+        viewModel.listMovies?.observe(viewLifecycleOwner, Observer { MovieList ->
             movieAdapter.submitList(MovieList)
-
         })
+
+        if (!viewModel.erroMessage.isNullOrBlank()){
+            Toast.makeText(requireContext(), viewModel.erroMessage, Toast.LENGTH_SHORT).show()
+        }
 
         viewModel.listTrending?.observe(viewLifecycleOwner, Observer { TVList ->
            trendingAdapter.submitList(TVList)
