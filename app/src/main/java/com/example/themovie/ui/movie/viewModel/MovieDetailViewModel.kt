@@ -14,10 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieDetailViewModel @Inject constructor(
-    val movieDataSource: MovieDataSource,
-    val movieApi: MovieApi,
-    @IoDispatcher val dispatcher: CoroutineDispatcher
-
+    val movieApi: MovieApi
 ) : ViewModel() {
 
     private val _movie: MutableLiveData<DetailMovieResponse> = MutableLiveData()

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themovie.databinding.MovieProductionItemBinding
 import com.example.themovie.model.domain.movieDetail.ProductionCompany
+import com.example.themovie.utils.AppConstants
 
 
 class ProductionAdapter() : ListAdapter<ProductionCompany, ProductionAdapter.viewHolder>(
@@ -30,7 +31,7 @@ class ProductionAdapter() : ListAdapter<ProductionCompany, ProductionAdapter.vie
         fun bind(item: ProductionCompany) {
 
             binding.titleProduction.text = item.name
-            Glide.with(binding.root).load("https://image.tmdb.org/t/p/w500${item.logo_path}")
+            Glide.with(binding.root).load(AppConstants.BASE_IMAGE + item.logo_path)
                 .into(binding.productionImage)
 
         }

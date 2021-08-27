@@ -43,7 +43,6 @@ class HomeFragement : Fragment() {
     private val trendingAdapter by lazy {
         TrendingListAdapter(
             onClickMovie = { trending ->
-                Log.d("diegotreding", "${trending}")
                 onCreateTrendingDetail(trending)
             }
         )

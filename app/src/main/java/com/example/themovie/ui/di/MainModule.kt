@@ -1,6 +1,7 @@
-package com.example.themovie.di
+package com.example.themovie.ui.di
 
 import androidx.lifecycle.ViewModel
+import com.example.themovie.di.ViewModelKey
 import com.example.themovie.ui.trending.viewModel.DetailTrendingViewModel
 import com.example.themovie.ui.home.viewModel.HomeViewModel
 import com.example.themovie.ui.movie.viewModel.MovieDetailViewModel

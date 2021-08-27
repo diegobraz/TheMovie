@@ -16,6 +16,7 @@ import com.example.themovie.model.domain.trending.Trending
 import com.example.themovie.ui.trending.adapter.TrendingProductionAdapter
 import com.example.themovie.ui.di.MainComponent
 import com.example.themovie.ui.trending.viewModel.DetailTrendingViewModel
+import com.example.themovie.utils.AppConstants
 import javax.inject.Inject
 
 class TrendingDetailActivity : AppCompatActivity() {
@@ -72,10 +73,9 @@ class TrendingDetailActivity : AppCompatActivity() {
     }
 
     private fun loadInformation() {
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500${trending.backdrop_path}")
+        Glide.with(this).load(AppConstants.BASE_IMAGE + trending.backdrop_path)
             .into(binding.tvImageDetail)
         binding.tvTitle.text = trending.original_name
-        Log.d("diegoMedia", "${trending.id}")
         binding.descriptionDetail.text = trending.overview
         binding.tvVotes.text = "${trending.vote_average} averege votes"
 

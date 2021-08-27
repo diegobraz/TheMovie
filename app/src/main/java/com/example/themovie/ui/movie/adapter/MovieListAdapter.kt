@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themovie.databinding.MovieItemBinding
 import com.example.themovie.model.domain.movie.Movie
+import com.example.themovie.utils.AppConstants
 
 
 class MovieListAdapter(val onClickMovie: (movie: Movie) -> Any) :
@@ -33,7 +34,7 @@ class MovieListAdapter(val onClickMovie: (movie: Movie) -> Any) :
         fun bind(item: Movie) {
 
             binding.titleMovie.text = item.title
-            Glide.with(binding.root).load("https://image.tmdb.org/t/p/w500${item.poster_path}")
+            Glide.with(binding.root).load(AppConstants.BASE_IMAGE + item.poster_path)
                 .into(binding.movieImage)
             onClickListener(item, binding)
         }

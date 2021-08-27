@@ -15,6 +15,7 @@ import com.example.themovie.model.domain.movie.Movie
 import com.example.themovie.ui.movie.adapter.ProductionAdapter
 import com.example.themovie.ui.di.MainComponent
 import com.example.themovie.ui.movie.viewModel.MovieDetailViewModel
+import com.example.themovie.utils.AppConstants
 import javax.inject.Inject
 
 
@@ -78,7 +79,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun loadMovieDetail() {
 
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
+        Glide.with(this).load(AppConstants.BASE_IMAGE + movie.backdrop_path)
             .into(binding.movieImageDetail)
         binding.titleMovieDetail.text = movie.title
         binding.releaseDataMovieDetail.text = movie.release_date
