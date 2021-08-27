@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.themovie.di.DaggerApplicationComponent
 
 
-class App: Application(){
+class App : Application() {
 
     val appComponent by lazy { DaggerApplicationComponent.factory().create(this) }
 

@@ -19,9 +19,9 @@ import javax.inject.Singleton
 class NetworkModule {
     @Singleton
     @Provides
-    fun providesInteceptor(): Interceptor{
+    fun providesInteceptor(): Interceptor {
         return Interceptor { chain ->
-            val newUrl:HttpUrl = chain.request().url
+            val newUrl: HttpUrl = chain.request().url
                 .newBuilder()
                 .addQueryParameter("api_key", AppConstants.TMDB_API_KEY)
                 .build()
@@ -36,13 +36,13 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun LoggingClient(authInterceptor: Interceptor):OkHttpClient{
+    fun LoggingClient(authInterceptor: Interceptor): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
-            .readTimeout(30,TimeUnit.SECONDS)
-            .connectTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .addNetworkInterceptor(interceptor)
             .addNetworkInterceptor(authInterceptor)
             .build()
@@ -50,7 +50,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesRetrofitInteance(logginClient: OkHttpClient):Retrofit{
+    fun providesRetrofitInteance(logginClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(AppConstants.BASE_URL)
             .client(logginClient)
@@ -68,10 +68,9 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun tmdTvApi(retrofit: Retrofit):TrendingApi{
+    fun tmdTvApi(retrofit: Retrofit): TrendingApi {
         return retrofit.create(TrendingApi::class.java)
     }
-
 
 
 }

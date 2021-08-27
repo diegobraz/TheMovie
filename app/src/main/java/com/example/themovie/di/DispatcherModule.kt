@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 
 @Module
-object  DispatcherModule {
+object DispatcherModule {
 
     @DefaultDispatcher
     @Provides
@@ -22,7 +22,6 @@ object  DispatcherModule {
     fun providerMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
 
-
 }
 
 @Retention(AnnotationRetention.BINARY)
@@ -33,7 +32,6 @@ annotation class DefaultDispatcher
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
 annotation class IoDispatcher
-
 
 
 @Retention(AnnotationRetention.BINARY)

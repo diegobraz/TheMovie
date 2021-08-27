@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.themovie.App
 import com.example.themovie.databinding.ActivityMovieDetailBinding
-import com.example.themovie.model.dto.movieDetail.DetailMovieResponse
-import com.example.themovie.model.dto.movie.Movie
-import com.example.themovie.ui.adapter.ProductionAdapter
+import com.example.themovie.model.domain.movieDetail.DetailMovieResponse
+import com.example.themovie.model.domain.movie.Movie
+import com.example.themovie.ui.movie.adapter.ProductionAdapter
 import com.example.themovie.ui.di.MainComponent
+import com.example.themovie.ui.movie.viewModel.MovieDetailViewModel
 import javax.inject.Inject
 
 
 class MovieDetailActivity : AppCompatActivity() {
 
-    lateinit var movie : Movie
+    lateinit var movie: Movie
 
     lateinit var mainComponent: MainComponent
 
@@ -29,7 +30,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     @Inject
     lateinit var vieModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<MovieDetailViewModel>{ vieModelFactory }
+    private val viewModel by viewModels<MovieDetailViewModel> { vieModelFactory }
 
     private val binding by lazy { ActivityMovieDetailBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +46,10 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.getDetail(movie.id)
 
         binding.produtionRelycleView.adapter = productionAdapter
-        binding.produtionRelycleView.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.HORIZONTAL,false)
+        binding.produtionRelycleView.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL, false
+        )
 
 
         viewModel.movie.observe(this, Observer { detailResponse ->
@@ -60,16 +63,14 @@ class MovieDetailActivity : AppCompatActivity() {
         loadMovieDetail()
 
 
-
-
     }
 
     private fun loadInfoDetail(detailMovieResponse: DetailMovieResponse?) {
         binding.genreMovieDeatil.text = detailMovieResponse?.genres?.first()?.name
-        if (detailMovieResponse?.genres?.size!! > 1){
+        if (detailMovieResponse?.genres?.size!! > 1) {
             binding.genre2MovieDeatil.visibility = View.VISIBLE
             binding.genre2MovieDeatil.text = detailMovieResponse.genres[1].name
-        }else{
+        } else {
             binding.genre2MovieDeatil.visibility = View.INVISIBLE
         }
 
@@ -77,7 +78,8 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun loadMovieDetail() {
 
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}").into(binding.movieImageDetail)
+        Glide.with(this).load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
+            .into(binding.movieImageDetail)
         binding.titleMovieDetail.text = movie.title
         binding.releaseDataMovieDetail.text = movie.release_date
         binding.descriptionMovieDeatil.text = movie.overview

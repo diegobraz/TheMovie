@@ -1,7 +1,7 @@
 package com.example.themovie.repository.trending
 
-import com.example.themovie.model.dto.Trending.Trending
-import com.example.themovie.model.dto.Trending.TrendingResponse
+import com.example.themovie.model.domain.trending.Trending
+import com.example.themovie.model.domain.trending.TrendingResponse
 import com.example.themovie.network.ErroResponse
 import com.example.themovie.network.NetworkResponse
 import com.example.themovie.network.api.TrendingApi
@@ -13,40 +13,42 @@ import javax.inject.Inject
 
 class TrendingDataImpl @Inject constructor(
     private val trendingApi: TrendingApi
-): TrendingDataSource {
+) : TrendingDataSource {
     override suspend fun getTrendingTv(
         dispatcher: CoroutineDispatcher,
         HomeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit
     ) {
-        withContext(dispatcher){
+        withContext(dispatcher) {
             val showTredingTv = async {
-                trendingApi.getTrending("en-Us",1)
+                trendingApi.getTrending("en-Us", 1)
             }
 
-            processData(HomeTvResultCallback,showTredingTv.await())
+            processData(HomeTvResultCallback, showTredingTv.await())
         }
     }
 
-    private fun processData(homeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit, await: NetworkResponse<TrendingResponse, ErroResponse>) {
+    private fun processData(
+        homeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit,
+        await: NetworkResponse<TrendingResponse, ErroResponse>
+    ) {
 
         val pair = buildResponse(await)
-        if (pair.first == null){
+        if (pair.first == null) {
             pair.second?.let { homeTvResultCallback(it) }
-        }else{
+        } else {
             homeTvResultCallback(NetworkResponse.Success(pair.first!!))
         }
-
 
 
     }
 
     private fun buildResponse(await: NetworkResponse<TrendingResponse, ErroResponse>):
-            Pair<List<Trending>?, NetworkResponse<List<Trending>,ErroResponse>? >{
+            Pair<List<Trending>?, NetworkResponse<List<Trending>, ErroResponse>?> {
 
-        return when(await){
+        return when (await) {
 
-            is NetworkResponse.Success ->{
-                Pair(await.body.results,null)
+            is NetworkResponse.Success -> {
+                Pair(await.body.results, null)
             }
             is NetworkResponse.ApiErro -> {
                 Pair(null, NetworkResponse.ApiErro(await.body, await.code))
@@ -60,7 +62,6 @@ class TrendingDataImpl @Inject constructor(
         }
 
     }
-
 
 
 }

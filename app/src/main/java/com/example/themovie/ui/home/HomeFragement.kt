@@ -14,37 +14,40 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovie.databinding.HomeFragementBinding
-import com.example.themovie.model.dto.movie.Movie
-import com.example.themovie.ui.adapter.MovieListAdapter
+import com.example.themovie.model.domain.movie.Movie
+import com.example.themovie.ui.movie.adapter.MovieListAdapter
 import com.example.themovie.ui.home.viewModel.HomeViewModel
 import javax.inject.Inject
-import com.example.themovie.model.dto.Trending.Trending
-import com.example.themovie.ui.MainActivity
+import com.example.themovie.model.domain.trending.Trending
+import com.example.themovie.ui.main.MainActivity
 import com.example.themovie.ui.movie.MovieDetailActivity
-import com.example.themovie.ui.TrendingDetailActivity
-import com.example.themovie.ui.adapter.TrendingListAdapter
+import com.example.themovie.ui.trending.TrendingDetailActivity
+import com.example.themovie.ui.trending.adapter.TrendingListAdapter
 
 
 class HomeFragement : Fragment() {
 
     @Inject
     lateinit var vieModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<HomeViewModel>{ vieModelFactory }
+    private val viewModel by viewModels<HomeViewModel> { vieModelFactory }
 
-    private val movieAdapter by lazy { MovieListAdapter(
-        onClickMovie = { movie ->
-            onCreateDetailMovie(movie)
-        }
-    ) }
+    private val movieAdapter by lazy {
+        MovieListAdapter(
+            onClickMovie = { movie ->
+                onCreateDetailMovie(movie)
+            }
+        )
+    }
 
 
-    private val trendingAdapter by lazy { TrendingListAdapter(
-        onClickMovie = { trending->
-            Log.d("diegotreding","${trending}")
-            onCreateTrendingDetail(trending)
-        }
-    ) }
-
+    private val trendingAdapter by lazy {
+        TrendingListAdapter(
+            onClickMovie = { trending ->
+                Log.d("diegotreding", "${trending}")
+                onCreateTrendingDetail(trending)
+            }
+        )
+    }
 
 
     private var _binding: HomeFragementBinding? = null
@@ -68,10 +71,12 @@ class HomeFragement : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.movieList.adapter = movieAdapter
-        binding.movieList.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.movieList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding.tvList.adapter = trendingAdapter
-        binding.tvList.layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.tvList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         viewModel.getMovies()
         viewModel.getTrendingTV()
@@ -81,12 +86,12 @@ class HomeFragement : Fragment() {
             movieAdapter.submitList(MovieList)
         })
 
-        if (!viewModel.erroMessage.isNullOrBlank()){
+        if (!viewModel.erroMessage.isNullOrBlank()) {
             Toast.makeText(requireContext(), viewModel.erroMessage, Toast.LENGTH_SHORT).show()
         }
 
         viewModel.listTrending?.observe(viewLifecycleOwner, Observer { TVList ->
-           trendingAdapter.submitList(TVList)
+            trendingAdapter.submitList(TVList)
         })
 
     }
@@ -94,13 +99,13 @@ class HomeFragement : Fragment() {
     private fun onCreateDetailMovie(movie: Movie) {
 
         val intent = Intent(activity, MovieDetailActivity::class.java)
-        intent.putExtra("movie",movie)
+        intent.putExtra("movie", movie)
         startActivity(intent)
 
     }
 
 
-    private fun onCreateTrendingDetail(trending:Trending) {
+    private fun onCreateTrendingDetail(trending: Trending) {
 
         val intent = Intent(activity, TrendingDetailActivity::class.java)
         intent.putExtra("trending", trending)

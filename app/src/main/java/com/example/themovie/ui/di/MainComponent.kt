@@ -2,9 +2,9 @@ package com.example.themovie.ui.di
 
 
 import com.example.themovie.ui.home.HomeFragement
-import com.example.themovie.ui.MainActivity
+import com.example.themovie.ui.main.MainActivity
 import com.example.themovie.ui.movie.MovieDetailActivity
-import com.example.themovie.ui.TrendingDetailActivity
+import com.example.themovie.ui.trending.TrendingDetailActivity
 import dagger.Subcomponent
 
 @Subcomponent(modules = [])

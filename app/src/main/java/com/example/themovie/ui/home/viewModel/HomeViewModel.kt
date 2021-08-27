@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themovie.di.IoDispatcher
-import com.example.themovie.model.dto.movie.Movie
-import com.example.themovie.model.dto.Trending.Trending
+import com.example.themovie.model.domain.movie.Movie
+import com.example.themovie.model.domain.trending.Trending
 import com.example.themovie.network.NetworkResponse
 import com.example.themovie.repository.movie.MovieDataSource
 import com.example.themovie.repository.trending.TrendingDataSource
@@ -21,24 +21,23 @@ class HomeViewModel @Inject constructor(
     @IoDispatcher val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-   private var _listMovies : MutableLiveData<List<Movie>> = MutableLiveData()
-    val listMovies:LiveData<List<Movie>>? = _listMovies
+    private var _listMovies: MutableLiveData<List<Movie>> = MutableLiveData()
+    val listMovies: LiveData<List<Movie>>? = _listMovies
 
 
-    private var _erroMessage : String? = null
-    val erroMessage:String? = _erroMessage
+    private var _erroMessage: String? = null
+    val erroMessage: String? = _erroMessage
 
 
+    private var _listTrending: MutableLiveData<List<Trending>> = MutableLiveData()
+    val listTrending: LiveData<List<Trending>>? = _listTrending
 
-    private var _listTrending : MutableLiveData<List<Trending>> = MutableLiveData()
-    val listTrending:LiveData<List<Trending>>? = _listTrending
-
-    fun getMovies(){
+    fun getMovies() {
         viewModelScope.launch(dispatcher) {
-            movieDataSource.getListMovies(dispatcher){ result ->
+            movieDataSource.getListMovies(dispatcher) { result ->
 
-                when(result){
-                    is NetworkResponse.Success ->{
+                when (result) {
+                    is NetworkResponse.Success -> {
                         _listMovies.postValue(result.body)
                     }
                     is NetworkResponse.Unknown -> {
@@ -58,11 +57,11 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getTrendingTV(){
-        viewModelScope.launch(dispatcher){
-            trendingDataSource.getTrendingTv(dispatcher){ result ->
-                when(result){
-                    is NetworkResponse.Success ->{
+    fun getTrendingTV() {
+        viewModelScope.launch(dispatcher) {
+            trendingDataSource.getTrendingTv(dispatcher) { result ->
+                when (result) {
+                    is NetworkResponse.Success -> {
                         _listTrending.postValue(result.body)
                     }
 
