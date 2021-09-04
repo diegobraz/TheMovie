@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themovie.databinding.HomeFragementBinding
+import com.example.themovie.databinding.HomeFragmentBinding
 import com.example.themovie.model.domain.movie.Movie
 import com.example.themovie.ui.movie.adapter.MovieListAdapter
 import com.example.themovie.ui.home.viewModel.HomeViewModel
@@ -25,7 +25,7 @@ import com.example.themovie.ui.trending.TrendingDetailActivity
 import com.example.themovie.ui.trending.adapter.TrendingListAdapter
 
 
-class HomeFragement : Fragment() {
+class HomeFragment : Fragment() {
 
     @Inject
     lateinit var vieModelFactory: ViewModelProvider.Factory
@@ -49,7 +49,7 @@ class HomeFragement : Fragment() {
     }
 
 
-    private var _binding: HomeFragementBinding? = null
+    private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
@@ -61,7 +61,7 @@ class HomeFragement : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = HomeFragementBinding.inflate(inflater, container, false)
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }

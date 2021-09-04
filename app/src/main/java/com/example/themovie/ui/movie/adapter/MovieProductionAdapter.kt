@@ -11,7 +11,7 @@ import com.example.themovie.model.domain.movieDetail.ProductionCompany
 import com.example.themovie.utils.AppConstants
 
 
-class ProductionAdapter() : ListAdapter<ProductionCompany, ProductionAdapter.viewHolder>(
+class MovieProductionAdapter() : ListAdapter<ProductionCompany, MovieProductionAdapter.viewHolder>(
     ProductionCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {

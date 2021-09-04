@@ -1,7 +1,7 @@
 package com.example.themovie.ui.di
 
 
-import com.example.themovie.ui.home.HomeFragement
+import com.example.themovie.ui.home.HomeFragment
 import com.example.themovie.ui.main.MainActivity
 import com.example.themovie.ui.movie.MovieDetailActivity
 import com.example.themovie.ui.trending.TrendingDetailActivity
@@ -18,6 +18,6 @@ interface MainComponent {
 
     fun inject(activity: MainActivity)
     fun inject(activity: MovieDetailActivity)
-    fun inject(fragement: HomeFragement)
+    fun inject(fragment: HomeFragment)
     fun inject(activity: TrendingDetailActivity)
 }

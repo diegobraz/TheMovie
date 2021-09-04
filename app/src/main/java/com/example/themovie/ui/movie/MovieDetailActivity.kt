@@ -12,7 +12,7 @@ import com.example.themovie.App
 import com.example.themovie.databinding.ActivityMovieDetailBinding
 import com.example.themovie.model.domain.movieDetail.DetailMovieResponse
 import com.example.themovie.model.domain.movie.Movie
-import com.example.themovie.ui.movie.adapter.ProductionAdapter
+import com.example.themovie.ui.movie.adapter.MovieProductionAdapter
 import com.example.themovie.ui.di.MainComponent
 import com.example.themovie.ui.movie.viewModel.MovieDetailViewModel
 import com.example.themovie.utils.AppConstants
@@ -27,7 +27,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private var details: DetailMovieResponse? = null
 
-    private val productionAdapter by lazy { ProductionAdapter() }
+    private val productionAdapter by lazy { MovieProductionAdapter() }
 
     @Inject
     lateinit var vieModelFactory: ViewModelProvider.Factory

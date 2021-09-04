@@ -6,7 +6,7 @@ import com.example.themovie.App
 import com.example.themovie.R
 import com.example.themovie.databinding.ActivityMainBinding
 import com.example.themovie.ui.di.MainComponent
-import com.example.themovie.ui.home.HomeFragement
+import com.example.themovie.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(biding.root)
 
-        val homeFragement = HomeFragement()
+        val homeFragement = HomeFragment()
         val fragement = supportFragmentManager
         fragement.beginTransaction().add(R.id.main_layout, homeFragement).commit()
 
