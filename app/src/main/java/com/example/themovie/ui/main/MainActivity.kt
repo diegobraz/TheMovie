@@ -11,19 +11,15 @@ import com.example.themovie.ui.home.HomeFragment
 class MainActivity : AppCompatActivity() {
 
     private val biding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
     lateinit var mainComponent: MainComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         mainComponent = (applicationContext as App).appComponent.mainComponent().create()
-
         super.onCreate(savedInstanceState)
         setContentView(biding.root)
 
         val homeFragement = HomeFragment()
         val fragement = supportFragmentManager
         fragement.beginTransaction().add(R.id.main_layout, homeFragement).commit()
-
     }
 }

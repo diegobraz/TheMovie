@@ -15,9 +15,7 @@ abstract class DataModule {
     @Binds
     abstract fun provideHomdeDataSource(datasource: MovieDataImpl): MovieDataSource
 
-
     @Singleton
     @Binds
     abstract fun provideTVDataSouce(datasource: TrendingDataImpl): TrendingDataSource
-
 }

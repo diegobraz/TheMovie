@@ -25,8 +25,7 @@ internal class NetworkResponseCall <S: Any, E: Any>(
              override fun onResponse(call: Call<S>, response: Response<S>) {
                  val body = response.body()
                  val code  = response.code()
-                 val erro = response.errorBody()
-
+                 val error = response.errorBody()
                  if (response.isSuccessful){
                      if (body!= null){
                      callback.onResponse(
@@ -42,10 +41,10 @@ internal class NetworkResponseCall <S: Any, E: Any>(
 
              }else{
                  val erroBody = when{
-                     erro == null -> null
-                     erro.contentLength()== 0L -> null
+                     error == null -> null
+                     error.contentLength()== 0L -> null
                      else -> try {
-                         erroConverter.convert(erro)
+                         erroConverter.convert(error)
                      }catch (e:Exception){
                          null
                      }
@@ -54,7 +53,6 @@ internal class NetworkResponseCall <S: Any, E: Any>(
                      callback.onResponse(this@NetworkResponseCall,
                          Response.success(NetworkResponse.ApiErro(erroBody,code))
                      )
-
                  }else{
                      callback.onResponse(this@NetworkResponseCall,
                          Response.success(NetworkResponse.Unknown()))
@@ -67,7 +65,6 @@ internal class NetworkResponseCall <S: Any, E: Any>(
                  callback.onResponse(this@NetworkResponseCall,
                      Response.success(NetworkResponse.Unknown()))
              }
-
          })
     }
 

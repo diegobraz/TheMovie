@@ -16,18 +16,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    val movieDataSource: MovieDataSource,
-    val trendingDataSource: TrendingDataSource,
+    private val movieDataSource: MovieDataSource,
+    private val trendingDataSource: TrendingDataSource,
     @IoDispatcher val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private var _listMovies: MutableLiveData<List<Movie>> = MutableLiveData()
     val listMovies: LiveData<List<Movie>>? = _listMovies
 
-
-    private var _erroMessage: String? = null
-    val erroMessage: String? = _erroMessage
-
+    private var _errorMessage: String? = null
+    val errorMessage: String? = _errorMessage
 
     private var _listTrending: MutableLiveData<List<Trending>> = MutableLiveData()
     val listTrending: LiveData<List<Trending>>? = _listTrending
@@ -35,27 +33,23 @@ class HomeViewModel @Inject constructor(
     fun getMovies() {
         viewModelScope.launch(dispatcher) {
             movieDataSource.getListMovies(dispatcher) { result ->
-
                 when (result) {
                     is NetworkResponse.Success -> {
                         _listMovies.postValue(result.body)
                     }
                     is NetworkResponse.Unknown -> {
-                        _erroMessage = GenericErro.ERRO_UNKNOW
+                        _errorMessage = GenericErro.ERROR_UNKNOWN
                     }
                     is NetworkResponse.ApiErro -> {
-                        _erroMessage = GenericErro.ERRO_API
+                        _errorMessage = GenericErro.ERROR_API
                     }
-                    is NetworkResponse.Erro -> {
-                        _erroMessage = GenericErro.ERRO
+                    is NetworkResponse.Error -> {
+                        _errorMessage = GenericErro.ERROR
                     }
                 }
-
             }
         }
-
     }
-
 
     fun getTrendingTV() {
         viewModelScope.launch(dispatcher) {
@@ -64,20 +58,17 @@ class HomeViewModel @Inject constructor(
                     is NetworkResponse.Success -> {
                         _listTrending.postValue(result.body)
                     }
-
                     is NetworkResponse.Unknown -> {
-                        _erroMessage = GenericErro.ERRO_UNKNOW
+                        _errorMessage = GenericErro.ERROR_UNKNOWN
                     }
                     is NetworkResponse.ApiErro -> {
-                        _erroMessage = GenericErro.ERRO_API
+                        _errorMessage = GenericErro.ERROR_API
                     }
-                    is NetworkResponse.Erro -> {
-                        _erroMessage = GenericErro.ERRO
+                    is NetworkResponse.Error -> {
+                        _errorMessage = GenericErro.ERROR
                     }
                 }
-
             }
         }
     }
-
 }

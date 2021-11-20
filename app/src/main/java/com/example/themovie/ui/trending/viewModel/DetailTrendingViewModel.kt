@@ -8,13 +8,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailTrendingViewModel @Inject constructor(
-    val trendingApi: TrendingApi
+    private val trendingApi: TrendingApi
 ) : ViewModel() {
-
 
     private val _trending: MutableLiveData<TVDetailResponse> = MutableLiveData()
     val tvTrending: LiveData<TVDetailResponse> = _trending
-
 
     fun getDetail(id: Int) {
         viewModelScope.launch {
@@ -28,6 +26,4 @@ class DetailTrendingViewModel @Inject constructor(
             }
         }
     }
-
-
 }

@@ -2,7 +2,7 @@ package com.example.themovie.network.api
 
 import com.example.themovie.model.domain.trendingDetail.TVDetailResponse
 import com.example.themovie.model.domain.trending.TrendingResponse
-import com.example.themovie.network.ErroResponse
+import com.example.themovie.network.ErrorResponse
 import com.example.themovie.network.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,8 +18,7 @@ interface TrendingApi {
         @Query("region")
         region: String? = null
 
-    ): NetworkResponse<TrendingResponse, ErroResponse>
-
+    ): NetworkResponse<TrendingResponse, ErrorResponse>
 
     @GET("tv/{tv_id}")
     suspend fun getTrendingDetails(
@@ -30,5 +29,5 @@ interface TrendingApi {
         @Query("append_to_response")
         append: String? = null
 
-    ): NetworkResponse<TVDetailResponse, ErroResponse>
+    ): NetworkResponse<TVDetailResponse, ErrorResponse>
 }

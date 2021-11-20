@@ -2,7 +2,7 @@ package com.example.themovie.repository.movie
 
 import com.example.themovie.model.domain.movie.Movie
 import com.example.themovie.model.domain.movie.MovieResponse
-import com.example.themovie.network.ErroResponse
+import com.example.themovie.network.ErrorResponse
 import com.example.themovie.network.api.MovieApi
 import com.example.themovie.network.NetworkResponse
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,7 +19,7 @@ class MovieDataImpl
 
     override suspend fun getListMovies(
         dispatcher: CoroutineDispatcher,
-        HomeResultCallback: (result: NetworkResponse<List<Movie>, ErroResponse>) -> Unit
+        HomeResultCallback: (result: NetworkResponse<List<Movie>, ErrorResponse>) -> Unit
     ) {
         withContext(dispatcher) {
             val showMovies = async {
@@ -35,8 +35,8 @@ class MovieDataImpl
 
 
     private fun processData(
-        homeResultCallback: (result: NetworkResponse<List<Movie>, ErroResponse>)
-        -> Unit, await: NetworkResponse<MovieResponse, ErroResponse>
+        homeResultCallback: (result: NetworkResponse<List<Movie>, ErrorResponse>)
+        -> Unit, await: NetworkResponse<MovieResponse, ErrorResponse>
     ) {
         val pair = buildResponse(await)
         if (pair.first == null) {
@@ -47,8 +47,8 @@ class MovieDataImpl
 
     }
 
-    private fun buildResponse(await: NetworkResponse<MovieResponse, ErroResponse>):
-            Pair<List<Movie>?, NetworkResponse<List<Movie>, ErroResponse>?> {
+    private fun buildResponse(await: NetworkResponse<MovieResponse, ErrorResponse>):
+            Pair<List<Movie>?, NetworkResponse<List<Movie>, ErrorResponse>?> {
 
         return when (await) {
 
@@ -61,8 +61,8 @@ class MovieDataImpl
             is NetworkResponse.Unknown -> {
                 Pair(null, NetworkResponse.Unknown(Throwable()))
             }
-            is NetworkResponse.Erro -> {
-                Pair(null, NetworkResponse.Erro(IOException()))
+            is NetworkResponse.Error -> {
+                Pair(null, NetworkResponse.Error(IOException()))
             }
         }
 

@@ -2,7 +2,7 @@ package com.example.themovie.network.api
 
 import com.example.themovie.model.domain.movieDetail.DetailMovieResponse
 import com.example.themovie.model.domain.movie.MovieResponse
-import com.example.themovie.network.ErroResponse
+import com.example.themovie.network.ErrorResponse
 import com.example.themovie.network.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,8 +18,7 @@ interface MovieApi {
         page: Int? = null,
         @Query("region")
         region: String? = null
-    ): NetworkResponse<MovieResponse, ErroResponse>
-
+    ): NetworkResponse<MovieResponse, ErrorResponse>
 
     @GET("movie/{id}")
     suspend fun getDetail(
@@ -29,6 +28,6 @@ interface MovieApi {
         language: String? = null,
         @Query("append_to_response")
         append: String? = null
-    ): NetworkResponse<DetailMovieResponse, ErroResponse>
+    ): NetworkResponse<DetailMovieResponse, ErrorResponse>
 
 }

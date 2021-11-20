@@ -20,13 +20,12 @@ import javax.inject.Singleton
     ]
 )
 interface ApplicationComponent {
-
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance applicationContext: Context): ApplicationComponent
     }
 
-    fun mainComponent(): MainComponent.factory
+    fun mainComponent(): MainComponent.Factory
 }
 
 @Module(subcomponents = [MainComponent::class])

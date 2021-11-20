@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +38,6 @@ class HomeFragment : Fragment() {
         )
     }
 
-
     private val trendingAdapter by lazy {
         TrendingListAdapter(
             onClickMovie = { trending ->
@@ -47,7 +45,6 @@ class HomeFragment : Fragment() {
             }
         )
     }
-
 
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
@@ -60,10 +57,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,35 +76,28 @@ class HomeFragment : Fragment() {
         viewModel.getMovies()
         viewModel.getTrendingTV()
 
-
         viewModel.listMovies?.observe(viewLifecycleOwner, Observer { MovieList ->
             movieAdapter.submitList(MovieList)
         })
 
-        if (!viewModel.erroMessage.isNullOrBlank()) {
-            Toast.makeText(requireContext(), viewModel.erroMessage, Toast.LENGTH_SHORT).show()
+        if (!viewModel.errorMessage.isNullOrBlank()) {
+            Toast.makeText(requireContext(), viewModel.errorMessage, Toast.LENGTH_SHORT).show()
         }
 
         viewModel.listTrending?.observe(viewLifecycleOwner, Observer { TVList ->
             trendingAdapter.submitList(TVList)
         })
-
     }
 
     private fun onCreateDetailMovie(movie: Movie) {
-
         val intent = Intent(activity, MovieDetailActivity::class.java)
         intent.putExtra("movie", movie)
         startActivity(intent)
-
     }
 
-
     private fun onCreateTrendingDetail(trending: Trending) {
-
         val intent = Intent(activity, TrendingDetailActivity::class.java)
         intent.putExtra("trending", trending)
         startActivity(intent)
     }
-
 }

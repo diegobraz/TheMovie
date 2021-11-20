@@ -27,5 +27,4 @@ interface MainModule {
     @ViewModelKey(DetailTrendingViewModel::class)
     fun bindTrendingDetailViewModel(trendingViewModel: DetailTrendingViewModel): ViewModel
 
-
 }

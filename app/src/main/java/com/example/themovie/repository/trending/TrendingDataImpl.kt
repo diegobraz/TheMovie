@@ -2,7 +2,7 @@ package com.example.themovie.repository.trending
 
 import com.example.themovie.model.domain.trending.Trending
 import com.example.themovie.model.domain.trending.TrendingResponse
-import com.example.themovie.network.ErroResponse
+import com.example.themovie.network.ErrorResponse
 import com.example.themovie.network.NetworkResponse
 import com.example.themovie.network.api.TrendingApi
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,7 +16,7 @@ class TrendingDataImpl @Inject constructor(
 ) : TrendingDataSource {
     override suspend fun getTrendingTv(
         dispatcher: CoroutineDispatcher,
-        HomeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit
+        HomeTvResultCallback: (result: NetworkResponse<List<Trending>, ErrorResponse>) -> Unit
     ) {
         withContext(dispatcher) {
             val showTredingTv = async {
@@ -28,8 +28,8 @@ class TrendingDataImpl @Inject constructor(
     }
 
     private fun processData(
-        homeTvResultCallback: (result: NetworkResponse<List<Trending>, ErroResponse>) -> Unit,
-        await: NetworkResponse<TrendingResponse, ErroResponse>
+        homeTvResultCallback: (result: NetworkResponse<List<Trending>, ErrorResponse>) -> Unit,
+        await: NetworkResponse<TrendingResponse, ErrorResponse>
     ) {
 
         val pair = buildResponse(await)
@@ -42,8 +42,8 @@ class TrendingDataImpl @Inject constructor(
 
     }
 
-    private fun buildResponse(await: NetworkResponse<TrendingResponse, ErroResponse>):
-            Pair<List<Trending>?, NetworkResponse<List<Trending>, ErroResponse>?> {
+    private fun buildResponse(await: NetworkResponse<TrendingResponse, ErrorResponse>):
+            Pair<List<Trending>?, NetworkResponse<List<Trending>, ErrorResponse>?> {
 
         return when (await) {
 
@@ -56,8 +56,8 @@ class TrendingDataImpl @Inject constructor(
             is NetworkResponse.Unknown -> {
                 Pair(null, NetworkResponse.Unknown(Throwable()))
             }
-            is NetworkResponse.Erro -> {
-                Pair(null, NetworkResponse.Erro(IOException()))
+            is NetworkResponse.Error -> {
+                Pair(null, NetworkResponse.Error(IOException()))
             }
         }
 

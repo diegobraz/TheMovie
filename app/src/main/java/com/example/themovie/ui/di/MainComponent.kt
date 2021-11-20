@@ -11,10 +11,9 @@ import dagger.Subcomponent
 interface MainComponent {
 
     @Subcomponent.Factory
-    interface factory {
+    interface Factory {
         fun create(): MainComponent
     }
-
 
     fun inject(activity: MainActivity)
     fun inject(activity: MovieDetailActivity)

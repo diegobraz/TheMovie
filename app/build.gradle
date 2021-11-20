@@ -16,6 +16,10 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String","BASE_URL","\"https://api.themoviedb.org/3/\""
+        buildConfigField "String","BASE_IMAGE","\"https://image.tmdb.org/t/p/w500\""
+        buildConfigField "String","TMDB_API_KEY","\"c2e78b4a8c14e65dd6e27504e6df95ad\""
+        buildConfigField "Long", "NETWORK_TIMEOUT", "java.util.concurrent.TimeUnit.SECONDS.toMillis(30)"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

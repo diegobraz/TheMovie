@@ -13,7 +13,7 @@ class NetworkResponseAdapterFactory: CallAdapter.Factory() {
         annotations: Array<out Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
-        //Call<NetworkResponse<MovieResponse,ErroResponse>>
+        //Call<NetworkResponse<MovieResponse,ErrorResponse>>
 
         if (Call::class.java != getRawType(returnType)){
             return null
