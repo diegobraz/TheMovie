@@ -10,3 +10,5 @@
     <li>Coroutines</li>
     <li>Glide</li>
 </ul>
+<h2>Gif</h2>
+<img src="https://user-images.githubusercontent.com/26634116/144694761-0b6938b5-decf-44d3-a577-430aed7e7ed3.gif" width="150px" />
